@@ -1,0 +1,29 @@
+image: docker:stable
+
+services:
+  - docker:dind
+  
+variables:
+  DOCKER_DRIVER: overlay2
+  CI_REGISTRY_IMAGE: frp
+  
+
+build-master:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:latest" .
+
+  only:
+    - master
+  tags:
+    - docker-build
+
+build:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+
+  except:
+    - master
+  tags:
+    - docker-build
