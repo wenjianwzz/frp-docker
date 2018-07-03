@@ -11,7 +11,7 @@ RUN cd / && \
     cd frp_${FRP_VERSION}_linux_amd64 && \
     mv frps /frps && \
     mv frpc /frpc && \
-    mdkir /etc/frp/ && \
+    mkdir /etc/frp/ && \
     mv frps.ini /etc/frp/frps.ini && \
     mv frpc.ini /etc/frp/frpc.ini && \
     cd .. && \
