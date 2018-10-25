@@ -5,24 +5,16 @@ services:
   
 variables:
   DOCKER_DRIVER: overlay2
-  CI_REGISTRY_IMAGE: frp
+  DEBIAN_FRONTEND: noninteractive
   
-
-build-master:
-  stage: build
-  script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:latest" .
-
-  only:
-    - master
-  tags:
-    - docker-build
+before_script:
+  - docker login -u "$ALIYUN_REGISTRY_LOGIN" -p "$ALIYUN_REGISTRY_PASSWD" $ALIYUN_REGISTRY
 
 build:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
   except:
     - master
   tags:
