@@ -1,6 +1,6 @@
 FROM alpine:3.7
 
-ENV FRP_VERSION 0.20.0
+ENV FRP_VERSION 0.25.3
 
 COPY frp_${FRP_VERSION}_linux_amd64.tar.gz /frp_${FRP_VERSION}_linux_amd64.tar.gz
 
