@@ -20,4 +20,4 @@ RUN cd / && \
     rm -rf frp_${FRP_VERSION}_${ARCH}
 
 
-CMD ["/frps", "-c /etc/frp/frps.ini"]
+CMD ["/frps", "-c", "/etc/frp/frps.ini"]
